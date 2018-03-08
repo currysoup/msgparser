@@ -32,9 +32,14 @@ public class OutlookFileAttachment implements OutlookAttachment {
 	private long size = -1;
 
 	/**
-	 * The size of the attachment.
+	 * The content ID, used for inlining images for example
 	 */
 	private String contentId;
+
+	/**
+	 * The content disposition, hints that an attachment is to be inlined into the email or just a regular attachment
+	 */
+	private String contentDisposition;
 
 	/**
 	 * Sets the property specified by the name parameter. Unknown names are ignored.
@@ -63,6 +68,9 @@ public class OutlookFileAttachment implements OutlookAttachment {
 					break;
 				case "3712":
 					setContentId((String) value);
+					break;
+				case "3716":
+					setContentDisposition((String) value);
 					break;
 				default:
 					// don't do anything, currently I don't even know if this is a functionally legal state
@@ -176,5 +184,20 @@ public class OutlookFileAttachment implements OutlookAttachment {
 	 */
 	private void setContentId(final String contentId) {
 		this.contentId = contentId;
+	}
+
+	/**
+	 * Bean getter for {@link #contentDisposition}.
+	 */
+	@SuppressWarnings("ElementOnlyUsedFromTestCode")
+	public String getContentDisposition() {
+		return contentDisposition;
+	}
+
+	/**
+	 * Bean setter for {@link #contentDisposition}.
+	 */
+	private void setContentDisposition(final String contentDisposition) {
+		this.contentDisposition = contentDisposition;
 	}
 }
